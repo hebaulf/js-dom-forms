@@ -16,73 +16,100 @@ const button = document.querySelector('#button');
 
 // Add submit event listener to the form
 form.addEventListener('submit', e => {
+    // Prevent reloading page
     e.preventDefault();
+    // Check for errors in form
     checkInputs();
 });
 
+// Function to check for errors in form
 function checkInputs() {
+    // trim to remove the whitespaces
     const fullNameValue = fullName.value.trim();
     const emailValue = email.value.trim();
     const phoneValue = phone.value.trim();
     const messageValue = message.value.trim();
 
-    let fullNameInvalid = fullNameValue === '';
-    let emailInvalid = emailValue === '' || !isEmail(emailValue);
-    let phoneInvalid = phoneValue === '' || phoneValue.length !== 7;
-    let messageInvalid = messageValue === '';
-    const anyFormInputInvalid = fullNameInvalid || emailInvalid || phoneInvalid || messageInvalid;
+    // Variables for validation rules, just to make the if statement more readable (not necessary)
+    const fullNameInvalid = fullNameValue === '';
+    const emailInvalid = emailValue === '' || !isEmail(emailValue);
+    const phoneInvalid = phoneValue === '' || phoneValue.length !== 7;
+    const messageInvalid = messageValue === '';
+    const anyInputInvalid = fullNameInvalid || emailInvalid || phoneInvalid || messageInvalid;
 
-    if(anyFormInputInvalid) {
+    if(anyInputInvalid) { // Checks if any input field is not correctly filled in
 
+        // Checks checks if name input is valid
         if(fullNameInvalid) {
+            // sets error function if nothing is filled in
             setErrorFor(fullName, 'Name cannot be blank');
         } else {
+            // else sets success function
             setSuccessFor(fullName);
         }
     
         if(emailValue === '') {
+            // sets error function if nothing is filled in
             setErrorFor(email, 'Email cannot be blank');
         } else if (!isEmail(emailValue)) {
+            // sets error function if email is not correctly filled in as the isEmail() function declares
             setErrorFor(email, 'Not a valid email');
         } else {
+            // else sets success function
             setSuccessFor(email);
         }
     
         if(phoneValue === '') {
+            // sets error function if nothing is filled in
             setErrorFor(phone, 'Phone cannot be blank');
         } else if (phoneValue.length != 7) {
+            // sets error function if phone does not have exactly 7 charachters
             setErrorFor(phone, 'Not a valid phone number length. Length has to be 7 characters');
         } else {
+            // else sets success function
             setSuccessFor(phone);
         }
     
         if(messageInvalid) {
+            // sets error function if nothing is filled in
             setErrorFor(message, 'Message cannot be blank');
         } else {
+            // else sets success function
             setSuccessFor(message);
         }
-    } else {
+
+    } else { // If all fields are correctly filled in
+        // adds the /#thankyou to the url
+        history.pushState("Thank you", null, "#thankyou")
+        // Sets the thankyou function
         goToThankYou();
     }
 }
 
+// Function for error, sets a class .error on div.form-control and a text to div.error-msg 
 function setErrorFor(input, message) {
-	const formControl = input.parentElement;
-	const errorMsg = formControl.querySelector('.error-msg');
-	formControl.className = 'form-control error';
-	errorMsg.innerText = message;
+	const formControl = input.parentElement; // formControl is the parent element of said input
+	const errorMsg = formControl.querySelector('.error-msg'); // Error message is of that same formControl
+	formControl.className = 'form-control error'; // creates a new class for form control with .error added
+ 	errorMsg.innerText = message; // Adds a message to that error-msg element.
 }
 
+// Function for success, sets a class .success on div.form-control
 function setSuccessFor(input) {
-	const formControl = input.parentElement;
-	formControl.className = 'form-control success';
+	const formControl = input.parentElement; // formControl is the parent element of said input
+	formControl.className = 'form-control success'; // creates a new class for form control with .success added
 }
-	
+
+// Checks if the email is correctly filled in
 function isEmail(email) {
+    // Regular expression rule for the email 
+    // Must have some letters, then an @, then some more letters followed by a ., and some letters
 	return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
 }
 
-const goToThankYou = () => { //these two lines are used often in the code so we make a function for it to simplify
+// Thank you function
+const goToThankYou = () => { 
+    // These lines replace the form content a thank you message
     h1.innerHTML = "Thank you!";
     p.innerHTML = ""
     form.innerHTML = "";
@@ -90,8 +117,9 @@ const goToThankYou = () => { //these two lines are used often in the code so we 
     button.innerHTML = "<a href='/' class='btn'>Back to Form</a>";
 }
 
-window.addEventListener("popstate", (e) => { //when ever the user pushes the back or forward button in the browser
+window.addEventListener("popstate", (e) => { 
+    // Whenever the user pushes the back or forward button in the browser
     if(e.state === "Thank you") goToThankYou();
 });
-
-if(location.hash === "#thankyou") goToThankYou(); //in case we refresh the Thank you page
+// In case we refresh the Thank you page
+if(location.hash === "#thankyou") goToThankYou(); 
