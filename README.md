@@ -1,5 +1,12 @@
 # Javascript in the browser - Forms
 
+
+<p align="center">
+  <img height="400" src="img/form.png">
+  <img height="400" src="img/form-error.png">
+</p>
+
+
 I created a page with a contact form which has four marked required input fields.  
 
 If you click the Submit button without filling in any inputs, the border becomes red and an icon along with red error text appears for each input that is not filled out correctrly.  
