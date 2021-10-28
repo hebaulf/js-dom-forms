@@ -1,3 +1,4 @@
+/* BASE STYLES */
 :root {
   --main-color: rgb(32, 131, 131);
   --text-color: rgb(48, 48, 48);
@@ -16,6 +17,7 @@
   --max-width: 600px;
 }
 
+/* BASE STYLES */
 * {
   margin: 0;
   padding: 0;
@@ -40,6 +42,7 @@ main {
   width: 100%;
 }
 
+/* BANNER STYLES */
 .banner {
   background: var(--main-color);
   color: var(--white-color);
@@ -54,6 +57,7 @@ main {
   margin-bottom: 2rem;
 }
 
+/* CONTAINER STYLES */
 .container {
   max-width: var(--max-width);
   margin: 0 auto;
@@ -63,7 +67,31 @@ main {
   font-size: var(--font-size-large);
 }
 
-form {
+/* BUTTON STYLES */
+.btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 15px 20px;
+  background-color: var(--main-color);
+  border: var(--border);
+  border-color: var(--main-color);
+  border-radius: var(--border-radius);
+  color: var(--white-color);
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-size: 20px;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: var(--box-shadow);
+  transition: all 0.3s ease-in-out;
+}
+
+.btn:hover {
+  background-color: var(--white-color);
+  color: var(--text-color);
+}
+
+/* FORM STYLES */
+.form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -71,7 +99,7 @@ form {
   padding: 4.5rem 0;
 }
 
-form span {
+.form span {
   margin-bottom: 2rem;
 }
 
@@ -113,6 +141,18 @@ form span {
   border-color: var(--error-color);
 }
 
+/* Remove arrows from number input */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 .form-control i {
   visibility: hidden;
   position: absolute;
@@ -139,40 +179,7 @@ form span {
   visibility: visible;
 }
 
-.btn {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 15px 20px;
-  background-color: var(--main-color);
-  border: var(--border);
-  border-color: var(--main-color);
-  border-radius: var(--border-radius);
-  color: var(--white-color);
-  font-family: "Zen Kaku Gothic New", sans-serif;
-  font-size: 20px;
-  text-decoration: none;
-  cursor: pointer;
-  box-shadow: var(--box-shadow);
-  transition: all 0.3s ease-in-out;
-}
-
-.btn:hover {
-  background-color: var(--white-color);
-  color: var(--text-color);
-}
-
+/* THANK YOU MESSAGE STYLES */
 #thankyou_message p {
   margin-bottom: 3rem;
-}
-
-/* Remove arrows from number input */
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-/* Firefox */
-input[type="number"] {
-  -moz-appearance: textfield;
 }
